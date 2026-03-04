@@ -1,0 +1,17 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Use 8.2.2 for better compatibility with Gradle 8.x
+        classpath 'com.android.tools.build:gradle:8.2.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}

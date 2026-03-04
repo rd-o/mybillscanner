@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Bill Scanner</string>
+    <string name="scan_prompt">Point camera at bill...</string>
+    <string name="valid_bill">Billete Válido</string>
+    <string name="observed_bill">ALERTA: Billete observado!</string>
+    <string name="deno_not_detected">Denomination not detected</string>
+</resources>
