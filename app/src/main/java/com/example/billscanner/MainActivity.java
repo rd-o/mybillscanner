@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView invalidHistoryText;
     private Switch debugSwitch;
     private Switch cameraSwitch;
+    private Button resetButton;
     private BillAnalyzer billAnalyzer;
     private ProcessCameraProvider cameraProvider;
     private boolean useFrontCamera = false;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         invalidHistoryText = findViewById(R.id.invalidHistoryText);
         debugSwitch = findViewById(R.id.debugSwitch);
         cameraSwitch = findViewById(R.id.cameraSwitch);
+        resetButton = findViewById(R.id.resetButton);
 
         validHistoryText.setMovementMethod(new ScrollingMovementMethod());
         invalidHistoryText.setMovementMethod(new ScrollingMovementMethod());
@@ -57,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
         cameraSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             useFrontCamera = !isChecked;
             restartCamera();
+        });
+
+        resetButton.setOnClickListener(v -> {
+            processedSerials.clear();
+            validDisplayList.clear();
+            invalidDisplayList.clear();
+            updateHistoryUI();
         });
 
         if (allPermissionsGranted()) {
