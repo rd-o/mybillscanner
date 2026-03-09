@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.*;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         validHistoryText.setMovementMethod(new ScrollingMovementMethod());
         invalidHistoryText.setMovementMethod(new ScrollingMovementMethod());
-        
+
         billAnalyzer = new BillAnalyzer();
 
         cameraSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -63,6 +64,18 @@ public class MainActivity extends AppCompatActivity {
             startCamera();
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 10);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 10) {
+            if (allPermissionsGranted()) {
+                startCamera();
+            } else {
+                Toast.makeText(this, "Permiso de cámara denegado", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
